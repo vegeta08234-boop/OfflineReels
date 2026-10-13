@@ -58,7 +58,7 @@ import kotlinx.coroutines.delay
 private val HeartRed = Color(0xFFFF3B5C)
 
 @Composable
-fun ReelsScreen(videos: List<LocalVideo>) {
+fun ReelsScreen(videos: List<LocalVideo>, onOpenFolders: () -> Unit) {
     val context = LocalContext.current
     val prefs = remember { Prefs(context) }
 
@@ -127,7 +127,7 @@ fun ReelsScreen(videos: List<LocalVideo>) {
             }
         }
 
-        // Top-right controls: favourites-only filter and shuffle.
+        // Top-right controls: folder picker, favourites-only filter and shuffle.
         Row(
             modifier = Modifier
                 .align(Alignment.TopEnd)
@@ -135,6 +135,9 @@ fun ReelsScreen(videos: List<LocalVideo>) {
                 .padding(12.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
+            RoundButton(onClick = onOpenFolders) {
+                Text(text = "📁", fontSize = 20.sp)
+            }
             RoundButton(active = favoritesOnly, onClick = { favoritesOnly = !favoritesOnly }) {
                 Icon(
                     imageVector = Icons.Filled.Favorite,

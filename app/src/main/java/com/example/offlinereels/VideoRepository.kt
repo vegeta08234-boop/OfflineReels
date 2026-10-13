@@ -12,6 +12,8 @@ data class LocalVideo(
     val uri: Uri,
     val name: String,
     val durationMs: Long,
+    val bucketId: Long,
+    val bucketName: String,
 )
 
 object VideoRepository {
@@ -24,6 +26,8 @@ object VideoRepository {
             MediaStore.Video.Media._ID,
             MediaStore.Video.Media.DISPLAY_NAME,
             MediaStore.Video.Media.DURATION,
+            MediaStore.Video.Media.BUCKET_ID,
+            MediaStore.Video.Media.BUCKET_DISPLAY_NAME,
         )
         val sort = "${MediaStore.Video.Media.DATE_ADDED} DESC"
 
@@ -31,6 +35,9 @@ object VideoRepository {
             val idCol = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID)
             val nameCol = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME)
             val durCol = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION)
+            val bucketIdCol = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.BUCKET_ID)
+            val bucketNameCol =
+                cursor.getColumnIndexOrThrow(MediaStore.Video.Media.BUCKET_DISPLAY_NAME)
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(idCol)
                 val duration = cursor.getLong(durCol)
@@ -40,6 +47,8 @@ object VideoRepository {
                     uri = ContentUris.withAppendedId(collection, id),
                     name = cursor.getString(nameCol) ?: "Video",
                     durationMs = duration,
+                    bucketId = cursor.getLong(bucketIdCol),
+                    bucketName = cursor.getString(bucketNameCol) ?: "Unknown folder",
                 )
             }
         }

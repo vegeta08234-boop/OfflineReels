@@ -101,8 +101,40 @@ private fun App() {
             if (s.videos.isEmpty()) {
                 CenteredMessage(text = "No videos found on this device.")
             } else {
-                ReelsScreen(videos = s.videos)
+                Library(videos = s.videos)
             }
+    }
+}
+
+/** Decides between the folder picker and the reel feed. */
+@Composable
+private fun Library(videos: List<LocalVideo>) {
+    val context = LocalContext.current
+    val prefs = remember { Prefs(context) }
+    var folder by remember { mutableStateOf(prefs.folder) }
+    var showPicker by remember { mutableStateOf(false) }
+
+    val filtered = remember(videos, folder) {
+        if (folder == null || folder == "all") videos
+        else videos.filter { it.bucketId.toString() == folder }
+    }
+
+    // First launch, a saved folder that no longer has videos, or the user asked to switch.
+    if (folder == null || filtered.isEmpty() || showPicker) {
+        val cancel: (() -> Unit)? =
+            if (folder != null && filtered.isNotEmpty()) ({ showPicker = false }) else null
+        FolderPickerScreen(
+            videos = videos,
+            currentKey = folder,
+            onPick = {
+                folder = it
+                prefs.folder = it
+                showPicker = false
+            },
+            onCancel = cancel,
+        )
+    } else {
+        ReelsScreen(videos = filtered, onOpenFolders = { showPicker = true })
     }
 }
 

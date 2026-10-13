@@ -26,6 +26,13 @@ class Prefs(context: Context) {
             sp.edit().putBoolean("shuffle", value).apply()
         }
 
+    /** null = never chosen, "all" = every video, otherwise a MediaStore bucket id. */
+    var folder: String?
+        get() = sp.getString("folder", null)
+        set(value) {
+            sp.edit().putString("folder", value).apply()
+        }
+
     var lastVideoId: Long
         get() = sp.getLong("lastVideoId", -1L)
         set(value) {

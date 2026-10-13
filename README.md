@@ -5,6 +5,8 @@ stored on your phone in a full-screen, swipe-up reel feed. No internet needed.
 
 ## Features
 - Swipe vertically to move between videos (newest first)
+- Pick which folder to watch (📁 button), remembered between launches
+- Like videos (double-tap), favourites-only filter, shuffle, mute, draggable seek bar
 - Tap to pause/resume, with a progress bar along the bottom
 - Videos loop; playback pauses when the app is backgrounded
 - One shared player, so only the visible video is decoded
