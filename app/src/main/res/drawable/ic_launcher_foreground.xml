@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Phone-shaped frame -->
+    <path
+        android:pathData="M44,26 H64 A8,8 0 0 1 72,34 V74 A8,8 0 0 1 64,82 H44 A8,8 0 0 1 36,74 V34 A8,8 0 0 1 44,26 Z"
+        android:fillColor="#00000000"
+        android:strokeColor="#2DD4BF"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round" />
+    <!-- Play triangle -->
+    <path
+        android:pathData="M49,42 L49,64 L65,53 Z"
+        android:fillColor="#FF6B6B"
+        android:strokeColor="#FF6B6B"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round" />
+    <!-- Progress line -->
+    <path
+        android:pathData="M43,74 H65"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round" />
+</vector>
